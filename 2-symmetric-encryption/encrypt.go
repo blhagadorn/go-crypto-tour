@@ -10,7 +10,8 @@ import (
 
 func main() {
 	if len(os.Args) != 2 {
-		fmt.Println("Usage: go run main.go <text_to_encrypt>")
+		fmt.Println("Usage: go run encrypt.go <text_to_encrypt>")
+		fmt.Println("Please provide the text to encrypt")
 		os.Exit(1)
 	}
 
@@ -36,6 +37,6 @@ func encrypt(text string, key []byte) (string, error) {
 	cfb := cipher.NewCFBEncrypter(block, key[:block.BlockSize()])
 	ciphertext := make([]byte, len(plaintext))
 	cfb.XORKeyStream(ciphertext, plaintext)
-
+	// Encode with base64 so it is readable
 	return base64.StdEncoding.EncodeToString(ciphertext), nil
 }

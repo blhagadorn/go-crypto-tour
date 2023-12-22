@@ -10,7 +10,8 @@ import (
 
 func main() {
 	if len(os.Args) != 2 {
-		fmt.Println("Usage: go run main.go <text_to_decrypt>")
+		fmt.Println("Usage: go run decrypt.go <text_to_decrypt>")
+		fmt.Println("Please provide the text to decrypt")
 		os.Exit(1)
 	}
 
@@ -27,6 +28,7 @@ func main() {
 }
 
 func decrypt(encryptedText string, key []byte) (string, error) {
+	// Decode with base64, since the cyphertext was encoded during encryption
 	ciphertext, err := base64.StdEncoding.DecodeString(encryptedText)
 	if err != nil {
 		return "", err
